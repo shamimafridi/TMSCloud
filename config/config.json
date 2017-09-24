@@ -1,0 +1,43 @@
+{
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "domain": {
+      "vizob":"http://www.tmscloud.com",
+      "SYSTEM_DOMAINS" : ["attms", "www", "http", "https", "tcp", "admin", "app", "apps"],
+      "BLACK_LIST_DOMAINS" : []
+    },
+
+  "urls": {
+    "clientLogin": "http://www.tmscloud.com"
+  },
+  "dbs": {
+    "client_base": "mongodb://localhost/",
+    "client_db_sufix": "_attms_com",
+    "attms_com_tms": "mongodb://localhost/attms_com_tms"
+  },
+  "auth": {
+    "tokenExpiresIn": "7d",
+    "saltWorkFactor" : 10,
+    "secret": "db97a3ed33ed5ea0430dbd02d400ede69e7ff5656d25811dcc720382c2997423"
+  },
+
+  "message": {
+    "invalidCredentials" : "Invalid credentials",
+    "accountLock" : "Account has tempory lock please try again later",
+    "unprocessableRequest": "Unprocessable request"
+  },
+  "logging": {
+    "name" : "AT TMS",
+    "type" : "dev",
+    "logDirectory": "logs",
+    "streams" : {
+        "level":"info",
+        "type": "rotating-file",
+        "path": "server.log",
+        "period": "1d",
+        "count": 2
+    }
+  }
+}
+
