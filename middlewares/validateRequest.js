@@ -32,13 +32,13 @@ module.exports = function(req, res, next) {
         bearerToken = bearer[1];
     try {
       var decoded = jwt.verify(bearerToken, config.auth.secret);
-      if (decoded.exp <= Date.now()) {
-        res.status(400);
-        res.json({ 'status': 400, 'message': 'Token Expired'});
-        return;
-      }
+     // if (decoded.exp <= Date.now()) {
+     //    res.status(400);
+     //    res.json({ 'status': 400, 'message': 'Token Expired'});
+     //    return;
+     //  }
 
-      if(typeof req.subdomains[0] === 'undefined'){
+      if(typeof req.headers['subdomain'] === 'undefined'){
         res.status(401);
         res.json({ 'status': 401, 'message': config.message.invalidCredentials});
         return;

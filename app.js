@@ -92,7 +92,7 @@ app.use(function(req, res, next) {
   console.log("Node app is running at localhost:" + server.get('port'));
 });*/
 app.set('clientSecret', 'secret'); // secret variable
-//app.listen(app.get('port'), '0.0.0.0');
+app.listen(3000, 'localhost');
 app.on('listening', function () {
   console.log('Express server started on port %s at %s', app.address().port, app.address().address);
 });
