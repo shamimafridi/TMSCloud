@@ -1,0 +1,4 @@
+{"name":"AT TMS","hostname":"shamim-pc","pid":7340,"level":30,"msg":"initialize logger:: AT TMS","time":"2017-09-24T15:24:52.848Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":7340,"level":50,"msg":"AuthService>>register>>","time":"2017-09-24T15:24:52.851Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":11428,"level":30,"msg":"initialize logger:: AT TMS","time":"2017-09-24T15:43:43.832Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":11428,"level":50,"msg":"AuthService>>register>>","time":"2017-09-24T15:43:43.835Z","v":0}

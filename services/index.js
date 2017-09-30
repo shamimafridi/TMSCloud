@@ -1,7 +1,8 @@
 'use strict';
 var SR = require('../config/ServiceRegistry');
 var services = {
-    Customer: './customer'
+    Customer: './customer',
+    COA: './coa'
 };
 
 

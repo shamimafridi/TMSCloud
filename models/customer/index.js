@@ -4,6 +4,12 @@ var ObjectId = Schema.ObjectId;
 
 var CustomerSchema   = new Schema({
     name: String,
+    address:{
+      address1:String,
+      address2:String,
+      city:String,
+      country:String
+    },
     stats :{
     	created_at : { type: Date},
     	updated_at: { type: Date},

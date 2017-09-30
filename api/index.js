@@ -1,7 +1,8 @@
 'use strict';
 var apiHandlers = {
 	users:'./users',
-	customer: './customer'
+    customer: './customer',
+    coa: './coa'
 };
 
 
