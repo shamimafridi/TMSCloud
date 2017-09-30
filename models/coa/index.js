@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
-
+const mongooseTreeAncestors = require('mongoose-tree-ancestors');//https://www.npmjs.com/package/mongoose-tree-ancestors
+const modelName = 'coa';
 var COASchema = new Schema({
   name: {
     type: String,
@@ -52,4 +53,13 @@ COASchema.pre('save', function (next) {
 });
 
 //mongoose.model('COA', COASchema);
+mongooseTreeAncestors(COASchema, {
+    // Set the parent field name and model reference
+    parentFieldName: 'parent',
+    parentFieldRefModel: modelName,
+
+    // Set the ancestors field name and model reference
+    ancestorsFieldName: 'parent_path',
+    ancestorsFieldRefModel: modelName
+});
 module.exports = COASchema; //mongoose.models.COA

@@ -39,13 +39,13 @@ COAService.prototype.Create = function (model) {
     var COA = new this.COA(); //global.ActiveClientMongooseConnection.models['COA'];    
     COA.name = model.name;
     COA.desc = model.desc;
-    COA.parent_path = model.parent_path
     COA.parent = model.parent
     
     return COA.save();
 };
 
 COAService.prototype.Update = function (id, model) {
+    var COA = global.ActiveClientMongooseConnection.models['COA'];
     return COA.findOneAndUpdate({
         _id: id
     }, {

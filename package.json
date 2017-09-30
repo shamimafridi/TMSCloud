@@ -25,6 +25,7 @@
     "jsonwebtoken": "^7.4.0",
     "mongoose": "^4.9.6",
     "mongoose-paginate": "^5.0.3",
+    "mongoose-tree-ancestors": "^1.0.0",
     "morgan": "~1.8.1",
     "multer": "^1.1.0",
     "proxy-middleware": "^0.14.0",

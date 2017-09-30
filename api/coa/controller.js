@@ -39,7 +39,6 @@ module.exports.create = function (req, res) {
     var coa = {};
     coa.name = req.body.name;
     coa.desc = req.body.desc;
-    coa.parent_path = req.body.parent_path;
     coa.parent = req.body.parent;
 
     var promise = COA.Create(coa);
