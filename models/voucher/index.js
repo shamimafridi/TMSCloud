@@ -4,9 +4,15 @@ var ObjectId = Schema.ObjectId;
 
 var VocherSchema = new Schema({
   branch: {
-    required: true,
-    type: ObjectId,
-    ref: 'Branch'
+    id: {
+      required: true,
+      type: ObjectId,
+      ref: 'Branch'
+    },
+    name: {
+      type: String,
+
+    }
   },
   date: {
     type: Date,
@@ -15,18 +21,22 @@ var VocherSchema = new Schema({
   desc: String,
   voucher_detail: [{
       coa: {
-        index:true,
-        require: true,
-        type: ObjectId,
-        ref: 'COA'
+        id: {
+          index: true,
+          unique:true,
+          require: true,
+          type: ObjectId,
+          ref: 'COA'
+        },
+        name: {
+          type: String
+        }
       },
       reference: String,
       debit: Number,
       credit: Number,
-
       narration: String
     }
-
   ],
   stats: {
     created_at: {
@@ -59,6 +69,7 @@ VocherSchema.pre('save', function (next) {
     this.stats.created_at = currentDate;
   next();
 });
+
 
 //mongoose.model('Customer', CustomerSchema);
 module.exports = VocherSchema; //mongoose.models.Customer
