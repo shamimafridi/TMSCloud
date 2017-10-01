@@ -2,10 +2,10 @@
 var apiHandlers = {
 	users:'./users',
     customer: './customer',
-    coa: './coa'
+    coa: './coa',
+    branch:'./branch',
+    voucher:'./voucher',
 };
-
-
 module.exports = {
     initialize: function (server) {
         Object.keys(apiHandlers).forEach(function (key) {

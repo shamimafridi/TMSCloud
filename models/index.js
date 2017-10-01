@@ -1,7 +1,9 @@
 'use strict';
 var models = {
     Customer: './customer',
-    COA: './coa'
+    COA: './coa',
+    Branch: './branch',
+    Voucher: './voucher'
 };
 
 module.exports = {
