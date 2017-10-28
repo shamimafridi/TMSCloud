@@ -58,7 +58,7 @@ module.exports.update = function (req, res) {
     })
     .catch(function(err){
     	logger.error('COA>>update>>', err);
-    	errorhandler.SendError(req, res);
+    	errorhandler.SendError(req, res,err);
     });
 };
 

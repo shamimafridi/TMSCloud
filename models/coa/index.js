@@ -8,7 +8,6 @@ const modelName = 'coa';
 var COASchema = new Schema({
   name: {
     type: String,
-    unique: true,
     required: true
   },
   desc: {

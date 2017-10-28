@@ -18,7 +18,6 @@ var VocherSchema = new Schema({
     type: Date,
     required: true
   },
-  desc: String,
   voucher_detail: [{
       coa: {
         id: {

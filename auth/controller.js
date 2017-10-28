@@ -55,7 +55,7 @@
          promiseValidateDomain.then(function (validate) {
            if (validate) {
              UserService.AuthenticateUser(username, password).then(function (user) {
-                 debugger
+                 
                  if (!user) { // If authentication fails, we send a 401 back
                    res.status(401);
                    res.json({
