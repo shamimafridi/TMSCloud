@@ -1,3 +1,4 @@
+var logger  = require('../config/logger');
 
 module.exports.wrapError =
 	 (fn) =>{
@@ -14,7 +15,7 @@ module.exports.wrapError =
 							code:error.code,
 							
 					};
-
+					logger.error('Error in common error handler', error);					
 					next(JSON.stringify(err))
 				});
 			}
