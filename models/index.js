@@ -3,7 +3,11 @@ var models = {
     Customer: './customer',
     COA: './coa',
     Branch: './branch',
-    Voucher: './voucher'
+    Voucher: './voucher',
+    Vehicle: './vehicle',
+    VehicleOwner: './vehicleOwner'
+    
+    
 };
 
 module.exports = {

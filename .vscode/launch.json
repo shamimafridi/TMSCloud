@@ -3,7 +3,7 @@
         "configurations": [
             {
                 
-                "port": 9229,
+                //"port": 9229,
                 "type": "node",
                 "request": "launch",
                 "address": "localhost",

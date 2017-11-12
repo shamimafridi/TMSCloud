@@ -5,6 +5,7 @@ var apiHandlers = {
     coa: './coa',
     branch:'./branch',
     voucher:'./voucher',
+    vehicleOwner:'./vehicleOwner',
 };
 module.exports = {
     initialize: function (server) {
