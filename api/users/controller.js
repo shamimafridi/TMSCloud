@@ -1,80 +1,43 @@
  'use strict';
-var Promise = require('bluebird'),
-  	errorhandler = require('../../middlewares/errorhandler'),
-   	userService = require('./../../services/user'),
-    UserService = new userService();
+ var errorHandler = require('../../middlewares/errorhandler'),
+     userService = require('./../../services/user'),
+     UserService = new userService();
 
-var logger  = require('../../config/logger');
+ var logger = require('../../config/logger');
 
-module.exports.query = function (req, res) {
-	var promise = UserService.GetByQuery();
-    promise.then(function(data) {
-    	return res.status(200).json(data);
-    })
-    .catch(function(err){
-      logger.error('UserService>>query>>', err);
-      errorhandler.SendError(req, res);
-    });
-};
+ module.exports.query = errorHandler.wrapError(async(req, res) => {
+     const data = await UserService.GetByQuery();
+     return res.status(200).json(data);
+ });
 
 
-module.exports.me = function (req, res) {
-	var promise = UserService.GetByQuery();
-    promise.then(function(data) {
-    	return res.status(200).json(data);
-    })
-    .catch(function(err){
-      logger.error('UserService>>query>>', err);
-      errorhandler.SendError(req, res);
-    });
-};
+ module.exports.me = errorHandler.wrapError(async(req, res) => {
+     const data = UserService.GetByQuery();
+     return res.status(200).json(data);
+ });
 
 
-module.exports.findOne = function (req, res) {
-    var promise = UserService.GetById(req.params.id);
-    promise.then(function(data) {
-    	return res.status(200).json(data);
-    })
-    .catch(function(err){
-    	logger.error('UserService>>query>>', err);
-    	errorhandler.SendError(req, res);
-    });
-};
+ module.exports.findOne = errorHandler.wrapError(async(req, res) => {
+     const data = await UserService.GetById(req.params.id);
+     return res.status(200).json(data);
+ });
 
 
-module.exports.create = function (req, res) {
-    var customer = {};
-    customer.name = req.body.name;
+ module.exports.create = errorHandler.wrapError(async(req, res) => {
+     var customer = {};
+     customer.name = req.body.name;
 
-    var promise = UserService.Create(customer);
-    promise.then(function(data) {
-    	return res.status(201).json(data);
-    })
-    .catch(function(err){
-    	errorhandler.SendError(req, res);
-    });
-};
+     const data = UserService.Create(customer);
+     return res.status(201).json(data);
+ });
 
 
-module.exports.update = function (req, res) {
-    var promise = UserService.Update(req.params.id, req.body);
-    promise.then(function(data) {
-      	return res.status(200).json(data);
-    })
-    .catch(function(err){
-    	logger.error('UserService>>update>>', err);
-    	errorhandler.SendError(req, res);
-    });
-};
+ module.exports.update = errorHandler.wrapError(async(req, res) => {
+     const promise = await UserService.Update(req.params.id, req.body);
+     return res.status(200).json(data);
+ });
 
-module.exports.delete = function (req, res) {
-  	var promise = UserService.MarkAsDelete(req.params.id);
-    promise.then(function(data) {
-    	return res.status(200).json('Resource has been deleted');
-    })
-    .catch(function(err){
-    	logger.error('UserService>>delete>>', err);
-    	errorhandler.SendError(req, res);
-    });
-};
-
+ module.exports.delete = errorHandler.wrapError(async(req, res) => {
+     const data = await UserService.MarkAsDelete(req.params.id);
+     return res.status(200).json('Resource has been deleted');
+ });
