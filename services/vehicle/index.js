@@ -36,14 +36,14 @@ VehicleService.prototype.GetByQuery = function (query) {
 };
 
 VehicleService.prototype.Create = function (model) {
-    var Vehicle = new this.Vehicle(); //global.ActiveClientMongooseConnection.models['Vehicle'];    
-    Vehicle.date = model.date;
-    Vehicle.desc = model.desc;
-    Vehicle.branch = model.branch;
-    Vehicle.voucher_detail = model.voucher_detail;
+    var vehicle = new this.Vehicle(); //global.ActiveClientMongooseConnection.models['Vehicle'];    
     
-    
-    return Vehicle.save();
+    vehicle.desc=model.desc;
+    vehcile.vehicle_owner=model.vehicle_owner;
+    vehicle.freight_coa=model.freight_coa;
+    vehicle.commission_coa=model.commission_coa;
+    vehicle.shortage_coa=model.shortage_coa;    
+    return vehicle.save();
 };
 
 VehicleService.prototype.Update = function (id, model) {

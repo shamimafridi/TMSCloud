@@ -4,6 +4,7 @@ var ObjectId = Schema.ObjectId;
 
 var VehicleOwnerSchema   = new Schema({
     name: String,
+    phoneNo:String,
     address:{
       address1:String,
       address2:String,

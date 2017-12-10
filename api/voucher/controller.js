@@ -21,7 +21,6 @@
  module.exports.create = errorHandler.wrapError(async(req, res) => {
      var Voucher = SR.GetService('Voucher');
      var voucher = {};
-     var voucher_detail = [];
      voucher.date = req.body.date;
      voucher.branch = req.body.branch;
      voucher.desc = req.body.desc;

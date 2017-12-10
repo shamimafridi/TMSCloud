@@ -1,16 +1,16 @@
 'use strict';
-//var Customer; 
+//var VehicleOwner; 
 
-function CustomerService(model_ctx) {
-    //Customer = model_ctx;
+function VehicleOwnerService(model_ctx) {
+    //VehicleOwner = model_ctx;
 }
 
-module.exports = CustomerService;
+module.exports = VehicleOwnerService;
 
-CustomerService.prototype.Customer
+VehicleOwnerService.prototype.VehicleOwner
 
-CustomerService.prototype.GetById = function (id) {
-    return Customer.findById({
+VehicleOwnerService.prototype.GetById = function (id) {
+    return VehicleOwner.findById({
         _id: id,
         'stats.deleted': false
     }, {
@@ -20,11 +20,11 @@ CustomerService.prototype.GetById = function (id) {
     }).exec();
 };
 
-CustomerService.prototype.GetByQuery = function (query) {
+VehicleOwnerService.prototype.GetByQuery = function (query) {
     if (query)
-        return Customer.find(query).exec();
+        return VehicleOwner.find(query).exec();
 
-    return Customer.find({
+    return VehicleOwner.find({
         'stats.deleted': false
     }, {
         '__v': 0,
@@ -33,14 +33,15 @@ CustomerService.prototype.GetByQuery = function (query) {
     }).exec();
 };
 
-CustomerService.prototype.Create = function (model) {
-    var customer = new this.Customer(); //global.ActiveClientMongooseConnection.models['Customer'];    
-    customer.name = model.name;
-    return customer.save();
+VehicleOwnerService.prototype.Create = function (model) {
+    var customer = new this.VehicleOwner(); //global.ActiveClientMongooseConnection.models['VehicleOwner'];    
+    owner.name = model.name;
+    owner.phoneNo = model.phoneNo;
+    owner.address=model.address;
 };
 
-CustomerService.prototype.Update = function (id, model) {
-    return Customer.findOneAndUpdate({
+VehicleOwnerService.prototype.Update = function (id, model) {
+    return VehicleOwner.findOneAndUpdate({
         _id: id
     }, {
         $set: model
@@ -49,8 +50,8 @@ CustomerService.prototype.Update = function (id, model) {
     }).exec();
 };
 
-CustomerService.prototype.MarkAsDelete = function (id) {
-    return Customer.findOneAndUpdate({
+VehicleOwnerService.prototype.MarkAsDelete = function (id) {
+    return VehicleOwner.findOneAndUpdate({
         _id: id
     }, {
         $set: {

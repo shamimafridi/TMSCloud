@@ -22,10 +22,11 @@
 
  module.exports.create = errorHandler.wrapError(async(req, res) => {
      var VehicleOwnerService = SR.GetService('VehicleOwner');
-     var customer = {};
-     customer.name = req.body.name;
-
-     const data = await VehicleOwnerService.Create(customer);
+     var owner = {};
+     owner.name = req.body.name;
+     owner.phoneNo = req.body.phoneNo;
+     owner.address=req.body.address;
+     const data = await VehicleOwnerService.Create(owner);
      return res.status(201).json(data);
  });
 

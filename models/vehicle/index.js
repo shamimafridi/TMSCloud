@@ -8,29 +8,47 @@ var VehicleSchema = new Schema({
     unique: true,
     required: true
   },
-  vehicle_owner: {
-    id: {
-      required: false,
-      type: ObjectId,
-      ref: 'VehicleOwner'
-    }
-  },
+
   desc: {
     type: String,
   },
- 
+  vehicle_owner: {
+    id: {
+      type: ObjectId,
+      ref: 'VehicleOwner'
+    },
+    name: {
+      type: String,
+    }
+  },
+  
+
+
   freight_coa: {
     id: {
-      required: true,
       type: ObjectId,
       ref: 'COA'
+    },
+    name: {
+      type: String
     }
   },
   commission_coa: {
     id: {
-      required: true,
       type: ObjectId,
       ref: 'COA'
+    },
+    name: {
+      type: String
+    }
+  },
+  shortage_coa: {
+    id: {
+      type: ObjectId,
+      ref: 'COA'
+    },
+    name: {
+      type: String
     }
   },
   stats: {
