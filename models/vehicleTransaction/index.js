@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var VocherSchema = new Schema({
+var VehicleTransactionSchema = new Schema({
   branch: {
     id: {
       required: true,
@@ -14,32 +14,47 @@ var VocherSchema = new Schema({
 
     }
   },
-  desc:{
-    type:String,
+  type: {
+    id: {
+      required: true,
+      type: ObjectId,
+      index: true,
+      ref: 'VehicleTransactionType'
+    },
+    transactionNature: {
+      type: String,
+
+    },
+    name: {
+      type: String,
+
+    }
+  },
+  vehicle_reg_no: String,
+  instrumental_type: String, //cheque or chash
+  desc: {
+    type: String
   },
   date: {
     type: Date,
     required: true
   },
-  voucher_detail: [{
-      coa: {
-        id: {
-          index: true,
-          unique:true,
-          require: true,
-          type: ObjectId,
-          ref: 'COA'
-        },
-        name: {
-          type: String
-        }
+  transaction_detail: [{
+    coa: {
+      id: {
+        index: true,
+        unique: true,
+        require: true,
+        type: ObjectId,
+        ref: 'COA'
       },
-      reference: String,
-      debit: Number,
-      credit: Number,
-      narration: String
-    }
-  ],
+      name: {
+        type: String
+      }
+    },
+    amount: Number,
+    narration: String
+  }],
   stats: {
     created_at: {
       type: Date
@@ -62,7 +77,7 @@ var VocherSchema = new Schema({
 });
 
 
-VocherSchema.pre('save', function (next) {
+VehicleTransactionSchema.pre('save', function (next) {
   var currentDate = new Date();
   this.stats.updated_at = currentDate;
   this.stats.created_by = '1';
@@ -74,4 +89,4 @@ VocherSchema.pre('save', function (next) {
 
 
 //mongoose.model('Customer', CustomerSchema);
-module.exports = VocherSchema; //mongoose.models.Customer
+module.exports = VehicleTransactionSchema; //mongoose.models.Customer

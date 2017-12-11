@@ -6,6 +6,9 @@ var apiHandlers = {
     branch:'./branch',
     voucher:'./voucher',
     vehicleOwner:'./vehicleOwner',
+    vehicleTransaction:'./vehicleTransaction',
+    transactionType:'./transactionType',
+    
 };
 module.exports = {
     initialize: function (server) {

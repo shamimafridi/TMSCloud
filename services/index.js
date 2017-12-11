@@ -6,7 +6,9 @@ var services = {
     Branch: './branch',
     Voucher: './voucher',
     Vehicle: './vehicle',
-    VehicleOwner: './vehicleOwner'   
+    VehicleOwner: './vehicleOwner' ,    
+    VehicleTransaction:'./vehicleTransaction',
+    TransactionType:'./transactionType',
     
 };
 
