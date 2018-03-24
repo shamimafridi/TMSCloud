@@ -18,6 +18,8 @@ module.exports.wrapError =
 					logger.error('Error in common error handler', error);					
 					next(JSON.stringify(err))
 				});
+			}else{
+				next('Error occured')
 			}
 		}
 	};

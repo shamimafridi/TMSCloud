@@ -19,6 +19,8 @@
 
 
  module.exports.create = errorHandler.wrapError(async(req, res) => {
+    req.checkBody('date', 'date is required').isr();
+    
      var VehicleTransaction = SR.GetService('VehicleTransaction');
      var vehicleTransaction = {};
      vehicleTransaction.date = req.body.date;

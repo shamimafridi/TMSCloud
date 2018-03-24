@@ -22,7 +22,7 @@ COAService.prototype.GetById = function (id) {
 
 COAService.prototype.GetByQuery = function (query) {
     //var COA = new this.COA(); 
-    var COA=  global.ActiveClientMongooseConnection.models['COA'];
+    var COA = global.ActiveClientMongooseConnection.models['COA'];
     if (query)
         return COA.find(query).exec();
 
@@ -40,19 +40,24 @@ COAService.prototype.Create = function (model) {
     COA.name = model.name;
     COA.desc = model.desc;
     COA.parent = model.parent
-    
+
     return COA.save();
 };
 
 COAService.prototype.Update = function (id, model) {
-    var COA = global.ActiveClientMongooseConnection.models['COA'];
-    return COA.findOneAndUpdate({
-        _id: id
-    }, {
-        $set: model
-    }, {
-        new: true
-    }).exec();
+    try {
+        var COA = global.ActiveClientMongooseConnection.models['COA'];
+        return COA.findOneAndUpdate({
+            _id: id
+        }, {
+            $set: model
+        }, {
+            new: true
+        })
+        
+    } catch (err) {
+        console.log('Error while updating COA')
+    }
 };
 
 COAService.prototype.MarkAsDelete = function (id) {
