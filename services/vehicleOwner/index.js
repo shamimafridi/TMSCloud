@@ -34,10 +34,11 @@ VehicleOwnerService.prototype.GetByQuery = function (query) {
 };
 
 VehicleOwnerService.prototype.Create = function (model) {
-    var customer = new this.VehicleOwner(); //global.ActiveClientMongooseConnection.models['VehicleOwner'];    
+    var owner = new this.VehicleOwner(); //global.ActiveClientMongooseConnection.models['VehicleOwner'];    
     owner.name = model.name;
     owner.phoneNo = model.phoneNo;
     owner.address=model.address;
+    return owner.save();
 };
 
 VehicleOwnerService.prototype.Update = function (id, model) {

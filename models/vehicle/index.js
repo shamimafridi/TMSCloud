@@ -10,7 +10,7 @@ var VehicleSchema = new Schema({
   },
 
   desc: {
-    type: String,
+    type: String
   },
   vehicle_owner: {
     id: {
@@ -18,11 +18,9 @@ var VehicleSchema = new Schema({
       ref: 'VehicleOwner'
     },
     name: {
-      type: String,
+      type: String
     }
   },
-  
-
 
   freight_coa: {
     id: {
@@ -72,17 +70,14 @@ var VehicleSchema = new Schema({
   }
 });
 
-
 VehicleSchema.pre('save', function (next) {
   var currentDate = new Date();
   this.stats.updated_at = currentDate;
   this.stats.created_by = '1';
   this.stats.updated_by = '1';
-  if (!this.stats.created_at)
-    this.stats.created_at = currentDate;
+  if (!this.stats.created_at) { this.stats.created_at = currentDate; }
   next();
 });
 
-
-//mongoose.model('Customer', CustomerSchema);
-module.exports = VehicleSchema; //mongoose.models.Customer
+// mongoose.model('Customer', CustomerSchema);
+module.exports = VehicleSchema; // mongoose.models.Customer

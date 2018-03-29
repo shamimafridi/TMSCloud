@@ -10,7 +10,6 @@
      return res.status(200).json(data);
  });
 
-
  module.exports.findOne = errorHandler.wrapError(async(req, res) => {
      var Voucher = SR.GetService('Voucher');
      const data = await Voucher.GetById(req.params.id);
