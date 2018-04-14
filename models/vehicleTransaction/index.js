@@ -10,7 +10,7 @@ var VehicleTransactionSchema = new Schema({
       ref: 'Branch'
     },
     name: {
-      type: String,
+      type: String
 
     }
   },
@@ -22,16 +22,15 @@ var VehicleTransactionSchema = new Schema({
       ref: 'VehicleTransactionType'
     },
     transactionNature: {
-      type: String,
-
+      type: String
     },
     name: {
-      type: String,
+      type: String
 
     }
   },
   vehicle_reg_no: String,
-  instrumental_type: String, //cheque or chash
+  instrumental_type: String, // cheque or chash
   desc: {
     type: String
   },
@@ -39,11 +38,23 @@ var VehicleTransactionSchema = new Schema({
     type: Date,
     required: true
   },
+  amount:Number,// amount for trip transaction
+  invoice_token_no: String,
+  
+  stationLocation:{
+    id: {
+      type: ObjectId,
+      ref: 'Location'
+    },
+    destinationLocation:{
+      id: {
+        type: ObjectId,
+        ref: 'Location'
+      },
   transaction_detail: [{
     coa: {
       id: {
         index: true,
-        unique: true,
         require: true,
         type: ObjectId,
         ref: 'COA'
@@ -51,7 +62,7 @@ var VehicleTransactionSchema = new Schema({
       name: {
         type: String
       }
-    },
+    },    
     amount: Number,
     narration: String
   }],
@@ -76,17 +87,16 @@ var VehicleTransactionSchema = new Schema({
   }
 });
 
-
 VehicleTransactionSchema.pre('save', function (next) {
   var currentDate = new Date();
   this.stats.updated_at = currentDate;
   this.stats.created_by = '1';
   this.stats.updated_by = '1';
-  if (!this.stats.created_at)
+  if (!this.stats.created_at) {
     this.stats.created_at = currentDate;
+  }
   next();
 });
 
-
-//mongoose.model('Customer', CustomerSchema);
-module.exports = VehicleTransactionSchema; //mongoose.models.Customer
+// mongoose.model('Customer', CustomerSchema);
+module.exports = VehicleTransactionSchema; // mongoose.models.Customer

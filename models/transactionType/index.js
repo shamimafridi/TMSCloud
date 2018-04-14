@@ -7,7 +7,10 @@ var ObjectId = Schema.ObjectId;
 
 var VehicleTransactionTypeSchema = new Schema({
   name: String,
-  nature: {type:String,required:true},
+  nature: {
+    type: String,
+    required: true
+  },
   stats: {
     created_at: {
       type: Date
@@ -29,30 +32,30 @@ var VehicleTransactionTypeSchema = new Schema({
   }
 });
 
-
 VehicleTransactionTypeSchema.pre('save', function (next) {
   var currentDate = new Date();
   this.stats.updated_at = currentDate;
   this.stats.created_by = '1';
   this.stats.updated_by = '1';
-  if (!this.stats.created_at)
+  if (!this.stats.created_at) {
     this.stats.created_at = currentDate;
+  }
   next();
 });
-VehicleTransactionTypeSchema.post('findOneAndUpdate', function (branch) {
+VehicleTransactionTypeSchema.post('findOneAndUpdate', function (type) {
   var Voucher = global.ActiveClientMongooseConnection.models['Voucher'];
-  //save every detail table
-  if (!branch) return true ;
+  // save every detail table
+  if (!type) return true;
   var s = {
-    id: branch._doc._id,
-    name: branch._doc.name,
-    //description: voucher.description
+    id: type._doc._id,
+    name: type._doc.name
+    // description: voucher.description
   };
   Voucher.update({
-    'branch.id': branch._doc._id
+    'type.id': type._doc._id
   }, {
     $set: {
-      "branch": s
+      'type': s
     }
   }, {
     multi: true
@@ -64,9 +67,7 @@ VehicleTransactionTypeSchema.post('findOneAndUpdate', function (branch) {
 
     logger.info('Voucher VehicleTransactionType Updated ' + updated + ' voucher with updated branch information');
   });
-
 });
 
-
-//mongoose.model('Customer', CustomerSchema);
-module.exports = VehicleTransactionTypeSchema; //mongoose.models.Customer
+// mongoose.model('Customer', CustomerSchema);
+module.exports = VehicleTransactionTypeSchema; // mongoose.models.Customer
