@@ -38,19 +38,21 @@ var VehicleTransactionSchema = new Schema({
     type: Date,
     required: true
   },
-  amount:Number,// amount for trip transaction
+  amount: Number, // amount for trip transaction
   invoice_token_no: String,
-  
-  stationLocation:{
+
+  stationLocation: {
     id: {
       type: ObjectId,
       ref: 'Location'
-    },
-    destinationLocation:{
-      id: {
-        type: ObjectId,
-        ref: 'Location'
-      },
+    }
+  },
+  destinationLocation: {
+    id: {
+      type: ObjectId,
+      ref: 'Location'
+    }
+  },
   transaction_detail: [{
     coa: {
       id: {
@@ -62,7 +64,7 @@ var VehicleTransactionSchema = new Schema({
       name: {
         type: String
       }
-    },    
+    },
     amount: Number,
     narration: String
   }],

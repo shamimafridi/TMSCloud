@@ -1,11 +1,12 @@
-{"name":"AT TMS","hostname":"shamim-pc","pid":7748,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-03-24T18:07:05.605Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":7748,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:07:05.606Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-03-24T18:07:40.940Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:07:40.941Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:08:39.703Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:10:39.526Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:14:22.361Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:15:57.613Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:24:07.285Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:24:27.644Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":1172,"level":50,"msg":"Error in common error handler","time":"2018-03-24T18:24:58.169Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":8236,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-03-25T06:57:33.486Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":8236,"level":30,"msg":"Voucher Branch Updated [object Object] voucher with updated branch information","time":"2018-03-25T06:57:33.486Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":8236,"level":30,"msg":"Voucher Branch Updated [object Object] voucher with updated branch information","time":"2018-03-25T07:03:35.043Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":8236,"level":30,"msg":"Voucher Branch Updated [object Object] voucher with updated branch information","time":"2018-03-25T07:08:10.312Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":12252,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-03-25T19:35:39.505Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":12252,"level":50,"msg":"Error in common error handler","time":"2018-03-25T19:35:39.505Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":12252,"level":50,"msg":"Error in common error handler","time":"2018-03-25T19:36:29.689Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":12252,"level":50,"msg":"Error in common error handler","time":"2018-03-25T19:37:46.701Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":12252,"level":50,"msg":"Error in common error handler","time":"2018-03-25T19:39:28.127Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":12252,"level":50,"msg":"Error in common error handler","time":"2018-03-25T19:40:12.475Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":2360,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-03-25T19:47:29.770Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":2360,"level":50,"msg":"Error in common error handler","time":"2018-03-25T19:47:29.772Z","v":0}
