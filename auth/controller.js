@@ -13,7 +13,7 @@
 
 
  module.exports.login = function (req, res) {
-   var username = req.body.username || '';
+   var username = req.body.email || '';
    var password = req.body.password || '';
    console.log('login>>', username, password, req.headers.origin);
    var user_account_id;
@@ -26,14 +26,14 @@
      return;
    }
 
-   if (typeof req.headers['subdomain'] === 'undefined') {
-     res.status(401);
-     res.json({
-       'status': 401,
-       'message': config.message.invalidCredentials
-     });
-     return;
-   }
+   //  if (typeof req.headers['subdomain'] === 'undefined') {
+   //    res.status(401);
+   //    res.json({
+   //      'status': 401,
+   //      'message': config.message.invalidCredentials
+   //    });
+   //    return;
+   //  }
 
 
    //Check if the user exits
@@ -50,60 +50,60 @@
 
      if (user) {
        //validate user belone to subDomain
-       if (req.subdomains) {
-         var promiseValidateDomain = AccountService.HasUserAndDomainValid(req.headers['subdomain'], user)
-         promiseValidateDomain.then(function (validate) {
-           if (validate) {
-             UserService.AuthenticateUser(username, password).then(function (user) {
-                 
-                 if (!user) { // If authentication fails, we send a 401 back
-                   res.status(401);
-                   res.json({
-                     "status": 401,
-                     "message": config.message.invalidCredentials
-                   });
-                   return;
-                 }
-                 if (user) {
-                   // If authentication is success, we will generate a token  and dispatch it to the client
-                   res.user = user;
-                   res.ClientKey = user.account;
-                   res.json(genToken(user));
-                 }
-               })
-               .catch(function (err) {
-                 if (err === 0 || err === 1) {
-                   res.status(401);
-                   res.json({
-                     "status": 401,
-                     "message": config.message.invalidCredentials
-                   });
-                   return;
-                 } else if (err === 2) {
-                   res.status(401);
-                   res.json({
-                     "status": 401,
-                     "message": config.message.accountLock
-                   });
-                   return;
-                 }
+       //   if (req.subdomains) {
+       // var promiseValidateDomain = AccountService.HasUserAndDomainValid(req.headers['subdomain'], user)
+       //  promiseValidateDomain.then(function (validate) {
+       //  if (validate) {
+       UserService.AuthenticateUser(username, password).then(function (user) {
 
-               });             //authenticate user 
-             // if (isValid) {
-
-
-           }else{
-            res.status(401);
-            res.json({
-              "status": 401,
-              "message": config.message.invalidCredentials
-            });
-            return;
+           if (!user) { // If authentication fails, we send a 401 back
+             res.status(401);
+             res.json({
+               "status": 401,
+               "message": config.message.invalidCredentials
+             });
+             return;
+           }
+           if (user) {
+             // If authentication is success, we will generate a token  and dispatch it to the client
+             res.user = user;
+             res.ClientKey = user.account;
+             res.json(genToken(user));
            }
          })
-       }
+         .catch(function (err) {
+           if (err === 0 || err === 1) {
+             res.status(401);
+             res.json({
+               "status": 401,
+               "message": config.message.invalidCredentials
+             });
+             return;
+           } else if (err === 2) {
+             res.status(401);
+             res.json({
+               "status": 401,
+               "message": config.message.accountLock
+             });
+             return;
+           }
 
+         }); //authenticate user 
+       // if (isValid) {
+
+
+       //  } else {
+       //    res.status(401);
+       //    res.json({
+       //      "status": 401,
+       //      "message": config.message.invalidCredentials
+       //    });
+       //    return;
+       //  }
+       //})
      }
+
+     // }
    })
 
  };
@@ -157,7 +157,7 @@
        }
 
        //create a new user
-       return UserService.Create(username, password);
+       return UserService.Create(username, password, company, domain);
      })
      .then(function (user) {
        var account = {
@@ -170,7 +170,7 @@
      })
      .then(function (account) {
        //now lets assign account to user: default_contact is user
-       return UserService.AssignAccount(account.default_contact, account.id);
+       return UserService.AssignAccount(account.default_contact, account.id, account.name, account.domain);
      })
      .then(function (user) {
        //New populate new user with account details
@@ -181,7 +181,8 @@
      })
      .catch(function (err) {
        logger.error('AuthService>>register>>', err);
-       errorhandler.SendError(req, res);
+       return res.status(500).send(err);
+       // errorhandler.SendError(req, res);
      });
 
  };
@@ -218,7 +219,8 @@
      })
      .catch(function (err) {
        logger.error('AuthService>>checkURL>>', err);
-       errorhandler.SendError(req, res);
+       return res.status(500).send(err);
+       // errorhandler.SendError(req, res);
      });
  };
 
@@ -253,7 +255,9 @@
      })
      .catch(function (err) {
        logger.error('UserService>>checkUsername>>', err);
-       errorhandler.SendError(req, res);
+       //  errorhandler.SendError(req, res);
+       return res.status(500).send(err);
+
      });
  };
 
@@ -327,7 +331,9 @@
      })
      .catch(function (err) {
        logger.error('AuthService>>checkURL>>', err);
-       errorhandler.SendError(req, res);
+      // errorhandler.SendError(req, res);
+      return res.status(500).send(err);
+
      });
  };
 
@@ -360,6 +366,8 @@
      })
      .catch(function (err) {
        logger.error('AuthService>>verifyDomain>>', err);
-       errorhandler.SendError(req, res);
+     //  errorhandler.SendError(req, res);
+     return res.status(500).send(err);
+
      });
  };
