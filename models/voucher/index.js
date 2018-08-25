@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
+
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
@@ -7,60 +9,61 @@ var VocherSchema = new Schema({
     id: {
       required: true,
       type: ObjectId,
-      ref: 'Branch'
+      ref: 'Branch',
     },
     name: {
-      type: String
-
-    }
+      type: String,
+    },
   },
   desc: {
-    type: String
+    type: String,
   },
   date: {
     type: Date,
-    required: true
+    required: true,
   },
-  voucher_detail: [{
-    coa: {
-      id: {
-        index: true,
-        unique: true,
-        require: true,
-        type: ObjectId,
-        ref: 'COA'
+  voucher_detail: [
+    {
+      coa: {
+        id: {
+          index: true,
+          unique: true,
+          require: true,
+          type: ObjectId,
+          ref: 'COA',
+        },
+        name: {
+          type: String,
+        },
       },
-      name: {
-        type: String
-      }
+      reference: String,
+      debit: Number,
+      credit: Number,
+      narration: String,
     },
-    reference: String,
-    debit: Number,
-    credit: Number,
-    narration: String
-  }],
+  ],
   stats: {
     created_at: {
-      type: Date
+      type: Date,
     },
     updated_at: {
-      type: Date
+      type: Date,
     },
 
     created_by: {
-      type: String
+      type: String,
     },
     updated_by: {
-      type: String
+      type: String,
     },
     deleted: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 });
 
-VocherSchema.pre('save', function (next) {
+VocherSchema.pre('save', function(next) {
   var currentDate = new Date();
   this.stats.updated_at = currentDate;
   this.stats.created_by = '1';
@@ -72,4 +75,7 @@ VocherSchema.pre('save', function (next) {
 });
 
 // mongoose.model('Customer', CustomerSchema);
-module.exports = VocherSchema; // mongoose.models.Customer
+
+VocherSchema.plugin(mongoosePaginate);
+mongoose.model('Voucher', VocherSchema);
+module.exports = VocherSchema;

@@ -17,7 +17,7 @@ module.exports.findOne = errorHandler.wrapError(async (req, res) => {
   const data = await UserService.GetById(req.params.id);
   return res.status(200).json(data);
 });
-module.exports.create = errorHandler.wrapError(async(req, res) => {
+module.exports.create = errorHandler.wrapError(async (req, res) => {
   var customer = {};
   customer.name = req.body.name;
 
@@ -25,13 +25,12 @@ module.exports.create = errorHandler.wrapError(async(req, res) => {
   return res.status(201).json(data);
 });
 
-
-module.exports.update = errorHandler.wrapError(async(req, res) => {
+module.exports.update = errorHandler.wrapError(async (req, res) => {
   const promise = await UserService.Update(req.params.id, req.body);
   return res.status(200).json(data);
 });
 
-module.exports.delete = errorHandler.wrapError(async(req, res) => {
+module.exports.delete = errorHandler.wrapError(async (req, res) => {
   const data = await UserService.MarkAsDelete(req.params.id);
   return res.status(200).json('Resource has been deleted');
 });

@@ -1,7 +1,7 @@
 // connection.js
 
 var mongoose = require('mongoose'),
-	config = require('./config.json');
+  config = require('./config.json');
 
 mongoose.Promise = require('bluebird');
 console.log('CREATING CONNECTION');
@@ -11,10 +11,8 @@ db.Schema = mongoose.Schema;
 //var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB Connection Error>> : '));
-db.once('open', function(){
+db.once('open', function() {
   console.log('MongoDB Connection ok!');
 });
 
 module.exports = db;
-
-

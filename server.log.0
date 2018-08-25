@@ -1,2 +1,5 @@
-{"name":"AT TMS","hostname":"shamim-pc","pid":11272,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-08-18T18:49:39.110Z","v":0}
-{"name":"AT TMS","hostname":"shamim-pc","pid":11272,"level":50,"msg":"AuthService>>register>>","time":"2018-08-18T18:49:39.111Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":13896,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-08-19T11:57:40.686Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":13896,"level":50,"msg":"AuthService>>register>>","time":"2018-08-19T11:57:40.686Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":13896,"level":50,"msg":"AuthService>>register>>","time":"2018-08-19T11:57:54.877Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":13288,"level":30,"msg":"initialize logger:: AT TMS","time":"2018-08-19T20:46:04.111Z","v":0}
+{"name":"AT TMS","hostname":"shamim-pc","pid":13288,"level":50,"msg":"Error in common error handler","time":"2018-08-19T20:46:04.111Z","v":0}
