@@ -16,10 +16,13 @@ var AccountSchema = new Schema({
     }
   },
   default_contact: {
-    type: String,
-    type: ObjectId,
-    ref: 'User',
-    required: true
+    id: {
+      type: ObjectId,
+      ref: 'User'
+    },
+    name: {
+      type: String
+    }
   },
   stats: {
     created_at: {

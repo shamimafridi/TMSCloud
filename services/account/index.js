@@ -73,7 +73,7 @@ AccountService.prototype.HasUserAndDomainValid = function (domain, user) {
 			domain: domain.toLowerCase()
 		}, 'name, domain', function (err, account) {
 			if (err) reject(err);
-			if (account && account._id.toString() === user.account.toString()) {
+			if (account && account.domain.toString() === user.account.name.toString()  && account._id.toString()=== user.account.id.toString()) {
 				resolve(true)
 			} else {
 				resolve(false);

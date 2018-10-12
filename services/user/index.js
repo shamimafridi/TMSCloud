@@ -18,12 +18,12 @@ UserService.prototype.GetById = function(id) {
       password: 0,
       login_attempts: 0,
       lock_until: 0,
-      'account.stats': 0,
-      'account.__v': 0,
-      'account.default_contact': 0,
+    //  'account.stats': 0,
+    //  'account.__v': 0
+      //'account.default_contact': {id:'',name:''},
     }
   )
-    .populate('account')
+   // .populate('account')
     .exec();
 };
 
@@ -65,10 +65,10 @@ UserService.prototype.Update = function(id, model) {
   ).exec();
 };
 
-UserService.prototype.AssignAccount = function(id, account_id, name, domain) {
+UserService.prototype.AssignAccount = function(default_contact, account_id, name, domain) {
   return User.findOneAndUpdate(
     {
-      _id: id,
+      _id: default_contact.id,
     },
     {
       $set: {

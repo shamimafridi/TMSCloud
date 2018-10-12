@@ -11,7 +11,7 @@ var Promise = require('bluebird'),
   helper = require('../config/helper'),
   logger = require('../config/logger');
 
-module.exports.login = function(req, res) {
+module.exports.login = function (req, res) {
   var username = req.body.email || '';
   var password = req.body.password || '';
   console.log('login>>', username, password, req.headers.origin);
@@ -36,7 +36,7 @@ module.exports.login = function(req, res) {
 
   //Check if the user exits
   var promise = UserService.ValidateUserName(username);
-  promise.then(function(user) {
+  promise.then(function (user) {
     if (!user) {
       // If authentication fails, we send a 401 back
       res.status(401);
@@ -54,7 +54,7 @@ module.exports.login = function(req, res) {
       //  promiseValidateDomain.then(function (validate) {
       //  if (validate) {
       UserService.AuthenticateUser(username, password)
-        .then(function(user) {
+        .then(function (user) {
           if (!user) {
             // If authentication fails, we send a 401 back
             res.status(401);
@@ -71,7 +71,7 @@ module.exports.login = function(req, res) {
             res.json(genToken(user));
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err === 0 || err === 1) {
             res.status(401);
             res.json({
@@ -117,7 +117,7 @@ function genToken(user) {
   };
 }
 
-module.exports.signup = function(req, res) {
+module.exports.signup = function (req, res) {
   console.log('signup enter');
   var username = req.body.username.toLowerCase() || '';
   var password = req.body.password || '';
@@ -136,7 +136,7 @@ module.exports.signup = function(req, res) {
   //Check domain name availability
   var promise = AccountService.ValidateDomain(domain);
   promise
-    .then(function(domainTaken) {
+    .then(function (domainTaken) {
       if (domainTaken) {
         res.status(500).json('domain name ' + domain + ' has been taken.');
         return;
@@ -144,7 +144,7 @@ module.exports.signup = function(req, res) {
       // validate user name
       return UserService.ValidateUserName(username);
     })
-    .then(function(usernameTaken) {
+    .then(function (usernameTaken) {
       if (usernameTaken) {
         res.status(500).json('username ' + username + ' has been taken.');
         return;
@@ -153,34 +153,37 @@ module.exports.signup = function(req, res) {
       //create a new user
       return UserService.Create(username, password, company, domain);
     })
-    .then(function(user) {
+    .then(function (user) {
       var account = {
         name: company,
         domain: domain,
-        default_contact: user._id,
+        default_contact: {
+          id: user.id,
+          name: username
+        }
       };
       //Create account for user
       return AccountService.Create(account);
     })
-    .then(function(account) {
+    .then(function (account) {
       //now lets assign account to user: default_contact is user
       return UserService.AssignAccount(account.default_contact, account.id, account.name, account.domain);
     })
-    .then(function(user) {
+    .then(function (user) {
       //New populate new user with account details
       return UserService.GetById(user._id);
     })
-    .then(function(user) {
+    .then(function (user) {
       return res.status(200).json(user);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       logger.error('AuthService>>register>>', err);
       return res.status(500).send(err);
       // errorhandler.SendError(req, res);
     });
 };
 
-module.exports.checkURL = function(req, res) {
+module.exports.checkURL = function (req, res) {
   var domain = req.params.domain || '';
   if (domain == '') {
     res.status(422);
@@ -194,7 +197,7 @@ module.exports.checkURL = function(req, res) {
   //Check domain name availability
   var promise = AccountService.ValidateDomain(domain);
   promise
-    .then(function(domainTaken) {
+    .then(function (domainTaken) {
       if (domainTaken) {
         res.status(200).json({
           status: 'err',
@@ -210,14 +213,14 @@ module.exports.checkURL = function(req, res) {
         return;
       }
     })
-    .catch(function(err) {
+    .catch(function (err) {
       logger.error('AuthService>>checkURL>>', err);
       return res.status(500).send(err);
       // errorhandler.SendError(req, res);
     });
 };
 
-module.exports.checkUsername = function(req, res) {
+module.exports.checkUsername = function (req, res) {
   var username = req.params.username || '';
   if (username == '') {
     res.status(422);
@@ -231,7 +234,7 @@ module.exports.checkUsername = function(req, res) {
   //Check username name availability
   var promise = UserService.ValidateUserName(username);
   promise
-    .then(function(usernameTaken) {
+    .then(function (usernameTaken) {
       if (usernameTaken) {
         res.status(200).json({
           status: 'err',
@@ -247,14 +250,14 @@ module.exports.checkUsername = function(req, res) {
         return;
       }
     })
-    .catch(function(err) {
+    .catch(function (err) {
       logger.error('UserService>>checkUsername>>', err);
       //  errorhandler.SendError(req, res);
       return res.status(500).send(err);
     });
 };
 
-module.exports.SuggestUrls = function(req, res) {
+module.exports.SuggestUrls = function (req, res) {
   var urls_checked = [];
   var checkURL_JSON = {};
   var domain = req.params.domain || '';
@@ -273,7 +276,7 @@ module.exports.SuggestUrls = function(req, res) {
   //Check domain name availability
   var promise = AccountService.ValidateDomain(domain);
   promise
-    .then(function(domainTaken) {
+    .then(function (domainTaken) {
       if (domainTaken) {
         checkURL_JSON.status = 'err';
         checkURL_JSON.message = 'taken';
@@ -293,7 +296,7 @@ module.exports.SuggestUrls = function(req, res) {
         res.end();
       }
     })
-    .then(function(domainTaken) {
+    .then(function (domainTaken) {
       if (domainTaken) {
         urls_checked.push({
           url: domaincrm,
@@ -307,7 +310,7 @@ module.exports.SuggestUrls = function(req, res) {
       }
       return AccountService.ValidateDomain(domain_crm);
     })
-    .then(function(domainTaken) {
+    .then(function (domainTaken) {
       if (domainTaken) {
         urls_checked.push({
           url: domain_crm,
@@ -322,14 +325,14 @@ module.exports.SuggestUrls = function(req, res) {
       checkURL_JSON.urls_checked = urls_checked;
       if (!url_available) res.status(200).json(checkURL_JSON);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       logger.error('AuthService>>checkURL>>', err);
       // errorhandler.SendError(req, res);
       return res.status(500).send(err);
     });
 };
 
-module.exports.verifyDomain = function(req, res) {
+module.exports.verifyDomain = function (req, res) {
   var domain = req.body.domain || '';
   if (domain == '') {
     res.status(422);
@@ -341,7 +344,7 @@ module.exports.verifyDomain = function(req, res) {
   }
   var promise = AccountService.ValidateDomain(domain);
   promise
-    .then(function(validDomain) {
+    .then(function (validDomain) {
       if (validDomain) {
         res.status(200).json({
           status: 'ok',
@@ -357,7 +360,7 @@ module.exports.verifyDomain = function(req, res) {
         return;
       }
     })
-    .catch(function(err) {
+    .catch(function (err) {
       logger.error('AuthService>>verifyDomain>>', err);
       //  errorhandler.SendError(req, res);
       return res.status(500).send(err);
